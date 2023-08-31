@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 import Timer from "./Timer";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Notification from "./Notification";
+import { NotificationContext } from "../../context/notification";
 
 function Landing() {
+  const logs = useContext(NotificationContext)
   return (
     <>
-      {" "}
+      <ToastContainer />{" "}
       <header>
         <div>
           <Image
@@ -16,12 +21,24 @@ function Landing() {
           />
         </div>
       </header>
-      <main>
-        <section className="text-center mt-24">
-          <h1 className="text-white font-bold text-5xl mb-4">WEB3LAGOS CONFERENCE CTF</h1>
+      <div>
+        <section className="text-center mt-12">
+          <h1 className="text-white uppercase font-ocra font-bold text-5xl">
+            WEB3LAGOS CONFERENCE CTF
+          </h1>
           <Timer />
         </section>
-      </main>
+
+        <section>
+          <h3 className="font-ocra text-white font-bold uppercase text-center mb-2 text-2xl">
+            Ctf update
+          </h3>
+
+          {!logs?.length && <p className="text-white font-bold text-center font-ocra">No Data to show!!</p> }
+
+          <Notification />
+        </section> 
+      </div>
     </>
   );
 }

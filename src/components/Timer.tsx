@@ -1,59 +1,38 @@
-import useCustomStopwatch from "./CustomHook";
-import React, { useEffect, useState } from "react";
+// Timer.js
+import React, { useEffect } from "react";
+import {useCustomStopwatch} from "./CustomHook";
 
 function Timer() {
-  const initialTotalSeconds =
-    typeof window !== "undefined" // Check if running in a browser context
-      ? parseInt(localStorage.getItem("totalSeconds") as any) || 0
-      : 0;
-
-  const { seconds, isRunning, start, pause, reset } =
-    useCustomStopwatch(initialTotalSeconds);
+  const { seconds, isRunning, start, resetAppState } = useCustomStopwatch();
 
   useEffect(() => {
-    start();
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Check if running in a browser context
-      localStorage.setItem("totalSeconds", seconds.toString());
-      if (seconds === 100 && isRunning) {
-        pause(); // Pause the timer when seconds reach 300 and isRunning is true
-      }
+    if (seconds <= 0) {
+      resetAppState();
     }
-  }, [seconds, isRunning]);
+  }, [seconds]);
+
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
   return (
-    <div className="text-white text-5xl my-12 ">
+    <div className="text-white text-5xl my-6">
       <div className="font-bold">
-        <span className="mx-2">{hours} Hours</span>:
-        <span className="mx-2">{minutes} Minutes</span>:
-        <span className="mx-2">{seconds % 60} Seconds</span>
+        <span className="mx-2 uppercase font-ocra">{hours} Hours</span>:
+        <span className="mx-2 uppercase font-ocra">{minutes} Minutes</span>:
+        <span className="mx-2 uppercase font-ocra">{remainingSeconds} Seconds</span>
       </div>
-      <p className="mt-12">{isRunning ? "CTF-ONGOING!" : "TIME-UP!!"}</p>
+      <p className="mt-6 uppercase">{isRunning ? "CTF-ONGOING!" : ""}</p>
       <div className="flex space-x-12 justify-center">
-        {isRunning ? (
-          ""
-        ) : (
+        {!isRunning && (
           <button
-            className={`${`bg-red-500`} pl-6 rounded-lg  my-4 pr-6`}
+            className={`${"bg-red-500 uppercase"} font-ocra pl-6 rounded-lg my-4 pr-6`}
             onClick={start}
           >
             START
           </button>
-        )}
-
-        {!isRunning && (
-          <button
-            disabled={isRunning}
-            className={`${`bg-red-500`} pl-6 rounded-lg  my-4 pr-6`}
-            onClick={reset}
-          >
-            reset
-          </button>
-        )}
+        ) 
+        }
       </div>
     </div>
   );
