@@ -14,6 +14,8 @@ interface LogEvent {
 
 const NotificationProvider = ({ children }: any) => {
     const [log, setLog] = useState<any>([]);
+    const [log1, setLog1] = useState<any[]>([])
+    const [log2, setLog2] = useState<any[]>([])
 console.log('logs',log)
     useEffect(() => {
         // Fetch logs initially
@@ -31,6 +33,10 @@ console.log('logs',log)
             clearInterval(interval);
         };
     }, []);
+
+    useEffect(() => {
+      setLog([...log1, ...log2])
+    }, [log1, log2])
 
     const allEvents = [
         "0xd540835b8e983927e8e9bc0c4ac4d7e1fa864b09f18fa2446c7e65091e528424",
@@ -80,7 +86,7 @@ console.log('logs',log)
         for (let i = 0; i < allLogs.length; i++) {
             v.push(returnEventParams(allLogs[i].topics[0], parse(allLogs[i])));
         }
-        setLog(v);
+        setLog1(v);
     }
 
     async function getLogChallenge2() {
@@ -99,7 +105,7 @@ console.log('logs',log)
             );
         }
 
-        setLog((prevLogData: any) => [...prevLogData, ...v]);
+        setLog2(v);
     }
 
     function returnEventParams(eventSignature: string, e: any[]) {
