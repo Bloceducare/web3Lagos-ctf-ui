@@ -14,7 +14,7 @@ interface LogEvent {
 
 const NotificationProvider = ({ children }: any) => {
     const [log, setLog] = useState<any>([]);
-
+console.log('logs',log)
     useEffect(() => {
         // Fetch logs initially
         getLog();
@@ -62,14 +62,13 @@ const NotificationProvider = ({ children }: any) => {
         "event Passed(string winner, uint256 timeFired)",
     ];
 
-    const timer = ["function CTFStart() external view returns (uint256)"];
 
     async function getLog() {
         const mainnetProvider = new ethers.JsonRpcProvider(rpc_url);
 
         const allLogs: any = await mainnetProvider.getLogs({
             address: challenge_one_contract_address,
-            fromBlock: 0,
+            fromBlock: 47015983,
             topics: [allEvents],
         });
         //log the topic and data of each event only
@@ -89,7 +88,7 @@ const NotificationProvider = ({ children }: any) => {
 
         const allLogs: any = await mainnetProvider.getLogs({
             address: challenge_two_contract_address,
-            fromBlock: 0,
+            fromBlock: 47015983,
             topics: [allEvents2],
         });
         // console.log("allLogs", allLogs);
