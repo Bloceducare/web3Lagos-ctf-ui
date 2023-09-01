@@ -7,36 +7,7 @@ import {
 } from "../utils";
 const NotificationContext = createContext([]);
 
-// interface DoorUnlocked {
-//   opener: string;
-//   key: string;
-// }
 
-//  interface LevelUnlocked {
-//   opener: string;
-//   level: string;
-//   timeFired: number;
-// }
-//  interface MasterLevelUnlocked {
-//   opener: string;
-//   level: string;
-//   timeFired: number;
-// }
-//  interface PrincipalChanged {
-//   culprit: string;
-//   newPrincipal: string;
-//   timeFired: number;
-// }
-//  interface ProxyRegistered {
-//   registrar: string;
-//   proxy: string;
-//   timeFired: number;
-// }
-//  interface FirstSolver {
-//   solver: string;
-//   level: string;
-//   timeFired: number;
-// }
 interface LogEvent {
   topics: string[];
   data: string;
