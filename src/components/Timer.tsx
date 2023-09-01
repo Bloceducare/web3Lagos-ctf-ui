@@ -7,7 +7,7 @@ function Timer() {
     // const timer = ["function CTFStart() external view returns (uint256)"];
     // const duration = 11400000; // Your specified duration in milliseconds
 
-    const targetDate = new Date("September 1, 2023 17:00:00");
+    const targetDate = new Date("September 1, 2023 17:15:00");
 
     const remainingTime = useCountdown(targetDate.getTime());
 
