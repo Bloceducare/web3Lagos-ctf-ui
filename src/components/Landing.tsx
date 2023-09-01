@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Timer from "./Timer";
 import { toast, ToastContainer } from "react-toastify";
@@ -7,7 +7,7 @@ import Notification from "./Notification";
 import { NotificationContext } from "../../context/notification";
 
 function Landing() {
-  const logs = useContext(NotificationContext)
+  const logs = useContext(NotificationContext);
   return (
     <>
       <ToastContainer />{" "}
@@ -27,6 +27,7 @@ function Landing() {
             WEB3LAGOS CONFERENCE CTF
           </h1>
           <Timer />
+          {/* <p className="font-ocra font-bold text-2xl text-white">Timer</p> */}
         </section>
 
         <section>
@@ -34,10 +35,14 @@ function Landing() {
             Ctf update
           </h3>
 
-          {!logs?.length && <p className="text-white font-bold text-center font-ocra">No Data to show!!</p> }
+          {!logs?.length && (
+            <p className="text-white font-bold text-center font-ocra">
+              No Data to show!!
+            </p>
+          )}
 
           <Notification />
-        </section> 
+        </section>
       </div>
     </>
   );

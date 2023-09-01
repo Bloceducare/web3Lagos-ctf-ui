@@ -4,7 +4,7 @@ export const challenge_one_contract_address: string =
 export const challenge_two_contract_address: string =
   "0xA15BB66138824a1c7167f5E85b957d04Dd34E468";
 export const rpc_url: string =
-  "https://da48-2c0f-2a80-a4-fc00-f237-214-a43c-2cad.ngrok-free.app";
+  "https://polygon-mainnet.infura.io/v3/8d52028baf5c4cb298a34795142c6885";
 
 // export const doorUnlocked =
 //   "0xe8e61146ba83d601498e943a7f5a296b6c9f7607fb36b4ec37511a88ea97b006";

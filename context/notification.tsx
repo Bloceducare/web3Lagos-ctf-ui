@@ -7,7 +7,6 @@ import {
 } from "../utils";
 const NotificationContext = createContext([]);
 
-
 interface LogEvent {
   topics: string[];
   data: string;
@@ -63,6 +62,8 @@ const NotificationProvider = ({ children }: any) => {
     "event Passed(string winner, uint256 timeFired)",
   ];
 
+  const timer = ["function CTFStart() external view returns (uint256)"];
+
   async function getLog() {
     const mainnetProvider = new ethers.JsonRpcProvider(rpc_url);
 
@@ -80,8 +81,10 @@ const NotificationProvider = ({ children }: any) => {
     for (let i = 0; i < allLogs.length; i++) {
       v.push(returnEventParams(allLogs[i].topics[0], parse(allLogs[i])));
     }
+    console.log("output:", v);
     setLog(v);
   }
+
 
   async function getLogChallenge2() {
     const mainnetProvider = new ethers.JsonRpcProvider(rpc_url);
@@ -96,7 +99,7 @@ const NotificationProvider = ({ children }: any) => {
     for (let i = 0; i < allLogs.length; i++) {
       v.push(returnEventParams2(allLogs[i].topics[0], parse2(allLogs[i])));
     }
-    setLog((prevLogData:any) => [...prevLogData, ...v]);
+    setLog((prevLogData: any) => [...prevLogData, ...v]);
   }
 
   function returnEventParams(eventSignature: string, e: any[]) {

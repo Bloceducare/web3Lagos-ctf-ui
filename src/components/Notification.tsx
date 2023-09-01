@@ -37,7 +37,7 @@ function Notification() {
       <section className="bg-gray-500 w-[30%] a rounded-lg mx-auto overflow-y-auto">
         <div className="flex justify-center">
           {!sortedData.length ? (
-            <p>No Details</p>
+            <p className="text-white font-ocra" >Fetching details......</p>
           ) : (
             <>
               <div className="overflow-y-auto max-h-[350px]">
