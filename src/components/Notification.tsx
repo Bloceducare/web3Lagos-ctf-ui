@@ -40,7 +40,7 @@ function Notification() {
             <p className="text-white font-ocra" >Fetching details......</p>
           ) : (
             <>
-              <div className="overflow-y-auto max-h-[350px]">
+              <div className="">
                 {sortedData?.map((item, index) => {
                   let message = "";
 
@@ -56,11 +56,11 @@ function Notification() {
                     message = `Registrar ${item.registrar} registered proxy ${item.proxy}`;
                   } else if (item.masterlevelopener && item.level) {
                     message = `Boom!!! ${item.masterlevelopener} unlocked  ${item.level}`;
-                  } else if (item.culpritFailed) {
+                  } else if (item.culpritFailed && item.timeFired) {
                     message = `Player ${item.culpritFailed} failed to open the vault`;
-                  } else if (item.overlord) {
+                  } else if (item.overlord && item.timeFired ) {
                     message = `Overlord ${item.overlord}  cracked the vault first`;
-                  } else if (item.winner) {
+                  } else if (item.winner && item.timeFired) {
                     message = `${item.winner} cracked the vault.`;
                   }
                   const formattedTime = formatUnixTimeInNigeria(

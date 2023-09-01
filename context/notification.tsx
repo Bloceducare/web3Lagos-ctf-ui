@@ -14,7 +14,9 @@ interface LogEvent {
 
 const NotificationProvider = ({ children }: any) => {
     const [log, setLog] = useState<any>([]);
-
+    const [log1, setLog1] = useState<any[]>([])
+    const [log2, setLog2] = useState<any[]>([])
+console.log('logs',log)
     useEffect(() => {
         // Fetch logs initially
         getLog();
@@ -31,6 +33,10 @@ const NotificationProvider = ({ children }: any) => {
             clearInterval(interval);
         };
     }, []);
+
+    useEffect(() => {
+      setLog([...log1, ...log2])
+    }, [log1, log2])
 
     const allEvents = [
         "0xd540835b8e983927e8e9bc0c4ac4d7e1fa864b09f18fa2446c7e65091e528424",
@@ -62,14 +68,13 @@ const NotificationProvider = ({ children }: any) => {
         "event Passed(string winner, uint256 timeFired)",
     ];
 
-    const timer = ["function CTFStart() external view returns (uint256)"];
 
     async function getLog() {
         const mainnetProvider = new ethers.JsonRpcProvider(rpc_url);
 
         const allLogs: any = await mainnetProvider.getLogs({
             address: challenge_one_contract_address,
-            fromBlock: 0,
+            fromBlock: 47015983,
             topics: [allEvents],
         });
         //log the topic and data of each event only
@@ -81,7 +86,7 @@ const NotificationProvider = ({ children }: any) => {
         for (let i = 0; i < allLogs.length; i++) {
             v.push(returnEventParams(allLogs[i].topics[0], parse(allLogs[i])));
         }
-        setLog(v);
+        setLog1(v);
     }
 
     async function getLogChallenge2() {
@@ -89,7 +94,7 @@ const NotificationProvider = ({ children }: any) => {
 
         const allLogs: any = await mainnetProvider.getLogs({
             address: challenge_two_contract_address,
-            fromBlock: 0,
+            fromBlock: 47015983,
             topics: [allEvents2],
         });
         // console.log("allLogs", allLogs);
@@ -100,7 +105,7 @@ const NotificationProvider = ({ children }: any) => {
             );
         }
 
-        setLog((prevLogData: any) => [...prevLogData, ...v]);
+        setLog2(v);
     }
 
     function returnEventParams(eventSignature: string, e: any[]) {
