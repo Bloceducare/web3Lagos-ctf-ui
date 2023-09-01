@@ -14,9 +14,8 @@ interface LogEvent {
 
 const NotificationProvider = ({ children }: any) => {
     const [log, setLog] = useState<any>([]);
-    const [log1, setLog1] = useState<any[]>([])
-    const [log2, setLog2] = useState<any[]>([])
-console.log('logs',log)
+    const [log1, setLog1] = useState<any[]>([]);
+    const [log2, setLog2] = useState<any[]>([]);
     useEffect(() => {
         // Fetch logs initially
         getLog();
@@ -35,8 +34,8 @@ console.log('logs',log)
     }, []);
 
     useEffect(() => {
-      setLog([...log1, ...log2])
-    }, [log1, log2])
+        setLog([...log1, ...log2]);
+    }, [log1, log2]);
 
     const allEvents = [
         "0xd540835b8e983927e8e9bc0c4ac4d7e1fa864b09f18fa2446c7e65091e528424",
@@ -68,7 +67,6 @@ console.log('logs',log)
         "event Passed(string winner, uint256 timeFired)",
     ];
 
-
     async function getLog() {
         const mainnetProvider = new ethers.JsonRpcProvider(rpc_url);
 
@@ -77,10 +75,6 @@ console.log('logs',log)
             fromBlock: 47015983,
             topics: [allEvents],
         });
-        //log the topic and data of each event only
-        // for (let log of allLogs) {
-        //   console.log(log.topics[0], log.data);
-        // }
 
         let v: any[] = [];
         for (let i = 0; i < allLogs.length; i++) {
@@ -97,7 +91,6 @@ console.log('logs',log)
             fromBlock: 47015983,
             topics: [allEvents2],
         });
-        // console.log("allLogs", allLogs);
         let v: any[] = [];
         for (let i = 0; i < allLogs.length; i++) {
             v.push(
